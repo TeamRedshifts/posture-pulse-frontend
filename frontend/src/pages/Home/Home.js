@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import  heroImage from '../../utils/images/landing_page_hero_image.svg';
 
 import './Home.css'
+import { div } from '@tensorflow/tfjs';
 
 export default function Home() {
 
     return (
+        <div>
         <div className='relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5'>
         {/* Hero Section */}
         <div className='max-w-6xl w-full h-screen flex flex-col justify-center relative'>
@@ -41,6 +43,11 @@ export default function Home() {
                 </p>
             </div>
         </div>
+        </div>
+        <footer className='w-full h-[120px] bg-slate-700 text-white px-20 py-10 text-center'>
+            <h2 className='tracking-widest font-bold text-2xl'>PosturePulse</h2>
+            <p className='text-sm tracking-wider'>Developed by Team RedShifts</p>
+        </footer>
     </div>
     )
 }

@@ -4,11 +4,12 @@ import { collection, addDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { exercises } from '../../utils/data';
 import { useNavigate } from 'react-router-dom';
-import { RiAddFill, RiLogoutCircleLine } from 'react-icons/ri';
+
 import { IoIosArrowBack } from 'react-icons/io';
 import { div } from '@tensorflow/tfjs';
 import { MdDelete } from 'react-icons/md';
-import { TbBulb } from 'react-icons/tb';
+
+import Sidebar from '../../components/Sidebar';
 
 
 
@@ -81,33 +82,8 @@ function CreatePlan() {
   return (
     <div className="w-full min-h-screen grid grid-cols-12 gap-4">
       {/* side bar */}
-      <div className='col-span-3 px-8 pt-6 mr-4 bg-slate-500 text-white'>
-        <div>
-          <h2 className='font-bold text-2xl tracking-wide'>PosturePulse<span className='align-super font-normal text-md'>&reg;</span></h2>
-          <p className='text-xs uppercase tracking-wide'>AI physiotherapy assistant</p>
-        </div>
-        <div>
-          <ul className='mt-8'>
-          <li className='mb-4'>
-              <a href='#' className='flex items-center border-2 border-slate-600 rounded-lg py-2 px-4 bg-slate-600 hover:bg-slate-700 hover:text-white'>
-                <RiAddFill className='mr-2' />
-                <span>New Plan</span>
-              </a>
-            </li>
-            <li className='mb-4'>
-              <a href='tutorials' className='flex items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
-                <TbBulb className='mr-2' />
-                <span>Tutorials</span>
-              </a>
-            </li>
-            <li className='mb-4'>
-              <a href='#' className='flex items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
-                <RiLogoutCircleLine className='mr-2' />
-                <span>Logout</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div className='col-span-3'>
+        <Sidebar />
       </div>
       {/* content */}
       <div className='col-span-9 py-6 pl-4 pr-8'>
@@ -140,16 +116,16 @@ function CreatePlan() {
             <div className="my-4">
               <button
                 onClick={() => setShowExerciseList(!showExerciseList)}
-                className="bg-slate-500 text-white px-8 py-2 rounded-md mx-auto block"
+                className="bg-slate-500 hover:bg-slate-600 text-white px-8 py-2 rounded-md mx-auto block"
               >
                 View Exercises
               </button>
               {showExerciseList && planType && (
                 <div className='w-full h-screen absolute top-0 left-0'>
                   <div className='bg-black opacity-70 w-full h-full' onClick={handleOutsideClick} />
-                  <div className='bg-white w-fit py-6 px-12 rounded-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-                    <div className="">
-                      <h2 className="text-xl font-semibold mb-2">Exercise List</h2>
+                  <div className='bg-white w-fit py-6 px-14 rounded-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                    <div className="text-center">
+                      <h2 className="text-xl font-semibold mb-4">Exercise List</h2>
                       <ul className="list-disc pl-5">
                         {exercises[planType].map(exercise => (
                           <li key={exercise.id} className="mb-2">
@@ -194,7 +170,7 @@ function CreatePlan() {
               <div className=''>
                 <button
                   onClick={handleSubmit}
-                  className="bg-slate-600 text-white px-6 py-2 rounded-md mt-3"
+                  className="bg-slate-600 hover:bg-slate-700 text-white px-6 py-2 rounded-md mt-3"
                 >
                   Submit Plan
                 </button>
