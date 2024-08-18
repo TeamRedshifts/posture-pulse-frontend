@@ -17,6 +17,7 @@ import {
   Legend,
 } from 'chart.js';
 import { RiAddFill, RiLogoutCircleLine } from 'react-icons/ri';
+import { TbBulb } from 'react-icons/tb';
 
 // Register necessary components for Chart.js
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
@@ -90,10 +91,16 @@ function ViewPlan() {
         </div>
         <div>
           <ul className='mt-8'>
-            <li className='mb-4'>
+          <li className='mb-4'>
               <a href='#' className='flex items-center border-2 border-slate-600 rounded-lg py-2 px-4 bg-slate-600 hover:bg-slate-700 hover:text-white'>
                 <RiAddFill className='mr-2' />
                 <span>New Plan</span>
+              </a>
+            </li>
+            <li className='mb-4'>
+              <a href='tutorials' className='flex items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
+                <TbBulb className='mr-2' />
+                <span>Tutorials</span>
               </a>
             </li>
             <li className='mb-4'>

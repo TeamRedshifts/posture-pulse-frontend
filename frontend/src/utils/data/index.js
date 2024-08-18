@@ -119,22 +119,20 @@ export const exercises={
             { id: 3, name: 'Exercise 3 leg' },
             // Add more exercises as needed
           ],
-    neck:[
+    neck:
         [
             { id: 1, name: 'Exercise 1 neck' },
             { id: 2, name: 'Exercise 2 neck' },
             { id: 3, name: 'Exercise 3 neck' },
             // Add more exercises as needed
           ]
-    ],
+    ,
 
-    shoulders:[
+    shoulders:
         [
             { id: 1, name: 'Exercise 1 shoulder' },
             { id: 2, name: 'Exercise 2 shoulder' },
             { id: 3, name: 'Exercise 3 shoulder' },
             // Add more exercises as needed
           ]
-    ]
-    
 }
