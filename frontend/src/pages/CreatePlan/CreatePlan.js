@@ -126,7 +126,7 @@ function CreatePlan() {
                   <div className='bg-white w-fit py-6 px-14 rounded-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                     <div className="text-center">
                       <h2 className="text-xl font-semibold mb-4">Exercise List</h2>
-                      <ul className="list-disc pl-5">
+                      <ul className="list-disc pl-5 text-left">
                         {exercises[planType].map(exercise => (
                           <li key={exercise.id} className="mb-2">
                             {exercise.name}
