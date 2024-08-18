@@ -15,6 +15,9 @@ export const poseImages = {
     Traingle: traingle,
     Shoulderstand: shoulderstand,
     Side_to_side_bend:sidebend,
+    'Calf Stretch' : sidebend,
+    'Side Leg Raise' : sidebend,
+    'Single Leg Raise' : sidebend,
 } 
 
 
