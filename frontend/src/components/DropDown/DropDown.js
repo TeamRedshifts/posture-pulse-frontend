@@ -19,6 +19,7 @@ return (
         </button>
         <ul class="dropdown-menu dropdown-custom-menu w-[30%] p-0 rounded-lg h-[82vh] shadow-md overflow-y-scroll" aria-labelledby="dropdownMenuButton1">
             {poseList.map((pose) => (
+                pose !== "No Pose" &&
                 <li onClick={() => setCurrentPose(pose)}>
                     <div class="dropdown-item-container flex gap-4 justify-between items-center border-2 m-2 px-10 rounded-lg text-lg">
                         <div>

@@ -1,6 +1,7 @@
 import * as poseDetection from '@tensorflow-models/pose-detection';
 import * as tf from '@tensorflow/tfjs';
 import React, { useRef, useState, useEffect } from 'react'
+import backend from '@tensorflow/tfjs-backend-webgl'
 import Webcam from 'react-webcam'
 import { count } from '../../utils/music'; 
  
@@ -14,12 +15,17 @@ import { POINTS, keypointConnections } from '../../utils/data';
 import { drawPoint, drawSegment } from '../../utils/helper'
 import Navbar from '../../components/Navbar';
 
+import { useLocation } from 'react-router-dom';
 
+
+
+
+
+const ACCEPTANCE_THRESHOLD = 0.75
 
 let skeletonColor = 'rgb(255,255,255)'
 let poseList = [
-  'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
-  'Shoulderstand', 'Traingle'
+  'Calf Stretch', 'Chair', 'Cobra', 'Dog', 'No Pose', 'Shoulderstand', 'Side Leg Raise', 'Single Leg Raise', 'Traingle', 'Tree', 'Warrior'
 ]
 
 let interval
@@ -32,6 +38,9 @@ let flag = false
 function Yoga() {
   const webcamRef = useRef(null)
   const canvasRef = useRef(null)
+
+  const location = useLocation();
+  const { plan } = location.state;
 
 
   const [startingTime, setStartingTime] = useState(0)
@@ -59,16 +68,27 @@ function Yoga() {
     setBestPerform(0)
   }, [currentPose])
 
-  const CLASS_NO = {
-    Chair: 0,
-    Cobra: 1,
-    Dog: 2,
-    No_Pose: 3,
-    Shoulderstand: 4,
-    Traingle: 5,
-    Tree: 6,
-    Warrior: 7,
+  // const CLASS_NO = {
+  //   Calf_Stretch: 0,
+  //   Chair: 1,
+  //   Cobra: 2,
+  //   Dog: 3,
+  //   No_Pose: 4,
+  //   Shoulderstand: 5,
+  //   Side_Leg_Raise: 6,
+  //   Single_Leg_Raise: 7,
+  //   Traingle: 8,
+  //   Tree: 9,
+  //   Warrior: 10,
+  // }
+
+  const CLASS_NO = {}
+
+  for (let i = 0; i < poseList.length; i++) {
+    CLASS_NO[poseList[i]] = i
   }
+
+  console.log(CLASS_NO)
 
   function get_center_point(landmarks, left_bodypart, right_bodypart) {
     let left = tf.gather(landmarks, left_bodypart, 1)
@@ -120,8 +140,10 @@ function Yoga() {
   const runMovenet = async () => {
     const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER};
     const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
+
     // const poseClassifier = await tf.loadLayersModel('https://models.s3.jp-tok.cloud-object-storage.appdomain.cloud/model.json')
-    const poseClassifier = await tf.loadLayersModel('https://models.s3.jp-tok.cloud-object-storage.appdomain.cloud/model.json')
+    const poseClassifier = await tf.loadLayersModel('/model/model.json');
+
     const countAudio = new Audio(count)
     countAudio.loop = true
     interval = setInterval(() => { 
@@ -172,10 +194,12 @@ function Yoga() {
         const processedInput = landmarks_to_embedding(input)
         const classification = poseClassifier.predict(processedInput)
 
+        console.log(classification, currentPose, CLASS_NO[currentPose])
+
         classification.array().then((data) => {         
           const classNo = CLASS_NO[currentPose]
           console.log(data[0][classNo])
-          if(data[0][classNo] > 0.97) {
+          if(data[0][classNo] > ACCEPTANCE_THRESHOLD) {
             
             if(!flag) {
               countAudio.play()

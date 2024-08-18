@@ -7,7 +7,8 @@ import Yoga1 from './pages/Yoga/Yoga1'
 
 import Tutorials from './pages/Tutorials/Tutorials'
 import CreatePlan from './pages/CreatePlan/CreatePlan'
-
+import ViewPlan from './pages/ViewPlan/ViewPlan'
+import RunModel from './pages/RunModel/RunModel'
 import './App.css'
 
 import Login from './pages/Login'
@@ -25,7 +26,8 @@ export default function App() {
         <Route path='/test' element={<Yoga1 />} />
         <Route path='/tutorials' element={<Tutorials />} />
         <Route path='/create-plan' element={<CreatePlan />} />
-
+        <Route path='/view-plan' element={<ViewPlan />} />
+        <Route path="/run_model" element={<RunModel />} />
       </Routes>
     </Router>
   )
