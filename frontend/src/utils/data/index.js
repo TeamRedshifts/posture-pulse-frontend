@@ -109,3 +109,32 @@ export const keypointConnections = {
     left_knee: ['left_ankle'],
     right_knee: ['right_ankle']
 }
+
+
+export const exercises={
+    leg:
+        [
+            { id: 1, name: 'Exercise 1 leg' },
+            { id: 2, name: 'Exercise 2 leg' },
+            { id: 3, name: 'Exercise 3 leg' },
+            // Add more exercises as needed
+          ],
+    neck:[
+        [
+            { id: 1, name: 'Exercise 1 neck' },
+            { id: 2, name: 'Exercise 2 neck' },
+            { id: 3, name: 'Exercise 3 neck' },
+            // Add more exercises as needed
+          ]
+    ],
+
+    shoulders:[
+        [
+            { id: 1, name: 'Exercise 1 shoulder' },
+            { id: 2, name: 'Exercise 2 shoulder' },
+            { id: 3, name: 'Exercise 3 shoulder' },
+            // Add more exercises as needed
+          ]
+    ]
+    
+}

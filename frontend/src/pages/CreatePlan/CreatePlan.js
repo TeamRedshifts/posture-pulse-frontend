@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db, auth } from '../../firebase'; // Adjust the import path as needed
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import { exercises } from '../../utils/data';
+import { useNavigate } from 'react-router-dom';
 
-const exercises = [
-  { id: 1, name: 'Exercise 1' },
-  { id: 2, name: 'Exercise 2' },
-  { id: 3, name: 'Exercise 3' },
-  // Add more exercises as needed
-];
+
+
+const planTypes = ['neck', 'leg', 'shoulders'];
 
 function CreatePlan() {
   const [planName, setPlanName] = useState('');
+  const [planType, setPlanType] = useState('');
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [showExerciseList, setShowExerciseList] = useState(false);
   const [user, setUser] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
-  // Listen for authentication state changes
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleAddExercise = (exercise) => {
     setSelectedExercises([...selectedExercises, { ...exercise, duration: 0 }]);
@@ -39,15 +43,20 @@ function CreatePlan() {
       console.log('User not authenticated');
       return;
     }
-
+  
     try {
       const docRef = await addDoc(collection(db, 'plans'), {
         userId: user.uid,
         planName,
+        planType,
         exercises: selectedExercises,
         createdAt: new Date()
       });
       console.log('Plan submitted with ID:', docRef.id);
+      setSuccessMessage('Plan submitted successfully!');
+      setTimeout(() => {
+       navigate('/view-plan');
+      }, 2000); // Redirect after 2 seconds
     } catch (e) {
       console.error('Error adding document: ', e);
     }
@@ -67,17 +76,33 @@ function CreatePlan() {
         />
       </div>
       <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">Plan Type</label>
+        <select
+          value={planType}
+          onChange={(e) => setPlanType(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          {/* <option value="" disabled>Select plan type</option>
+          <option value="strength">Strength</option>
+          <option value="flexibility">Flexibility</option>
+          <option value="balance">Balance</option>
+          <option value="endurance">Endurance</option> */}
+
+          {planTypes.map(ptype =>  <option value={ptype}>{ptype}</option>)}
+        </select>
+      </div>
+      <div className="mb-4">
         <button
           onClick={() => setShowExerciseList(!showExerciseList)}
           className="bg-blue-500 text-white px-4 py-2 rounded-md"
         >
           Add Exercise
         </button>
-        {showExerciseList && (
+        {showExerciseList && planType && (
           <div className="mt-4">
             <h2 className="text-xl font-semibold mb-2">Exercise List</h2>
             <ul className="list-disc pl-5">
-              {exercises.map(exercise => (
+              {exercises[planType].map(exercise => (
                 <li key={exercise.id} className="mb-2">
                   {exercise.name}
                   <button
@@ -121,6 +146,11 @@ function CreatePlan() {
       >
         Submit Plan
       </button>
+      {successMessage && (
+      <div className="mt-4 p-4 bg-green-100 text-green-700 rounded-md">
+        {successMessage}
+      </div>
+    )}
     </div>
   );
 }
