@@ -14,6 +14,10 @@ import { poseImages } from '../../utils/pose_images';
 import { POINTS, keypointConnections } from '../../utils/data';
 import { drawPoint, drawSegment } from '../../utils/helper'
 
+import { useLocation } from 'react-router-dom';
+
+
+
 
 
 const ACCEPTANCE_THRESHOLD = 0.75
@@ -33,6 +37,9 @@ let flag = false
 function Yoga() {
   const webcamRef = useRef(null)
   const canvasRef = useRef(null)
+
+  const location = useLocation();
+  const { plan } = location.state;
 
 
   const [startingTime, setStartingTime] = useState(0)
