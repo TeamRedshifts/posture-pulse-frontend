@@ -4,6 +4,8 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from 'react-icons/fa';
+import {poseImages} from '../../utils/pose_images';
+
 
 import { Link } from 'react-router-dom';
 import Chart from 'chart.js/auto';
@@ -22,7 +24,18 @@ import { RiAddFill, RiLogoutCircleLine } from 'react-icons/ri';
 // Register necessary components for Chart.js
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-
+function getImage (planType){
+    if(planType === 'leg'){
+        return poseImages['Leg'];
+    }
+    else if(planType === 'shoulder'){
+        return poseImages['Shoulder'];
+    }else if(planType === 'neck'){
+        return poseImages['Neck'];
+    }else{
+        return poseImages['Shoulder'];
+    }
+}
 function ViewPlan() {
   const [plans, setPlans] = useState([]);
   const [user, setUser] = useState(null);
@@ -124,7 +137,11 @@ function ViewPlan() {
                 onClick={() => handleCardClick(plan)}
               >
                 <div className='col-span-2'>
-                  <img src='https://via.placeholder.com/150' alt='plan' className='w-full h-full object-cover' />
+                   
+                
+                <img src={getImage(plan.planType)} alt='plan' className='w-full h-full object-cover' />
+                
+                
                 </div>
                 <div className='col-span-4 py-2 px-4'>
                   <h2 className="text-xl font-semibold mb-2">{plan.planName}</h2>
@@ -146,6 +163,8 @@ function ViewPlan() {
           <div className='w-full h-[330px]'>
             <Line data={data} options={options} />
           </div>
+
+          {/* <div className='mt-4'><Piechart /></div> */}
         </div>
       </div>
     </div>

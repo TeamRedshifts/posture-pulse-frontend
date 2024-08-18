@@ -6,6 +6,10 @@ import warrior from './warrior.jpg'
 import traingle from './traingle.jpg'
 import shoulderstand from './shoulderstand.jpg'
 import sidebend from './side-to-side-bend.webp'
+import leg from './leg pain.jpg'
+import neck from './neck pain.jpg'
+import shoulder from './shoulder pain.jpg'
+
 export const poseImages = {
     Tree: tree,
     Cobra: cobra,
@@ -18,6 +22,10 @@ export const poseImages = {
     'Calf Stretch' : sidebend,
     'Side Leg Raise' : sidebend,
     'Single Leg Raise' : sidebend,
+
+    Leg:leg,
+    Neck:neck,
+    Shoulder:shoulder,
 } 
 
 
