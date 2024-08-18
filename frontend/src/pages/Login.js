@@ -3,16 +3,19 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import  heroImage from '../utils/images/landing_page_hero_image.svg';
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful");
+      navigate('/view-plan');
     } catch (error) {
       alert(error.message);
     }

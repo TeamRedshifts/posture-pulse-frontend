@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from 'react-icons/fa';
 
+import { Link } from 'react-router-dom';
 import Chart from 'chart.js/auto';
 import  { Line } from 'react-chartjs-2';
 import {
@@ -91,16 +92,16 @@ function ViewPlan() {
         <div>
           <ul className='mt-8'>
             <li className='mb-4'>
-              <a href='#' className='flex items-center border-2 border-slate-600 rounded-lg py-2 px-4 bg-slate-600 hover:bg-slate-700 hover:text-white'>
+              <Link to='/create-plan' className='flex items-center border-2 border-slate-600 rounded-lg py-2 px-4 bg-slate-600 hover:bg-slate-700 hover:text-white'>
                 <RiAddFill className='mr-2' />
                 <span>New Plan</span>
-              </a>
+              </Link>
             </li>
             <li className='mb-4'>
-              <a href='#' className='flex items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
+              <Link to='/' className='flex items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
                 <RiLogoutCircleLine className='mr-2' />
                 <span>Logout</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
