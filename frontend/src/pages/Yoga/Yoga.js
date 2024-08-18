@@ -12,6 +12,7 @@ import DropDown from '../../components/DropDown/DropDown';
 import { poseImages } from '../../utils/pose_images';
 import { POINTS, keypointConnections } from '../../utils/data';
 import { drawPoint, drawSegment } from '../../utils/helper'
+import Navbar from '../../components/Navbar';
 
 
 
@@ -212,7 +213,7 @@ function Yoga() {
 
   if(isStartPose) {
     return (
-      <div className="yoga-container">
+      <div className="bg-white text-black min-w-full min-h-screen py-12">
         <div className="performance-container">
             <div className="pose-performance">
               <h4>Pose Time: {poseTime} s</h4>
@@ -221,44 +222,44 @@ function Yoga() {
               <h4>Best: {bestPerform} s</h4>
             </div>
           </div>
-        <div>
-          
-          <Webcam 
-          width='640px'
-          height='480px'
-          id="webcam"
-          ref={webcamRef}
-          style={{
-            position: 'absolute',
-            left: 120,
-            top: 100,
-            padding: '0px',
-          }}
-        />
-          <canvas
-            ref={canvasRef}
-            id="my-canvas"
-            width='640px'
-            height='480px'
-            style={{
-              position: 'absolute',
-              left: 120,
-              top: 100,
-              zIndex: 1
-            }}
-          >
-          </canvas>
-        <div>
-            <img 
-              src={poseImages[currentPose]}
-              className="pose-img"
+        <div className='relative flex justify-center items-center'>
+          <div>
+            <Webcam 
+              width='640px'
+              height='480px'
+              id="webcam"
+              ref={webcamRef}
+              style={{
+                position: 'absolute',
+                left: 120,
+                top: 100,
+                padding: '0px',
+              }}
             />
+            <canvas
+              ref={canvasRef}
+              id="my-canvas"
+              width='640px'
+              height='480px'
+              style={{
+                position: 'absolute',
+                left: 120,
+                top: 100,
+                zIndex: 1
+              }}
+            >
+            </canvas>
           </div>
-         
+          <div>
+              <img 
+                src={poseImages[currentPose]}
+                className="pose-img"
+              />
+          </div>
         </div>
         <button
           onClick={stopPose}
-          className="secondary-btn"    
+          className="mx-auto block border-2 border-slate-500 shadow-md shadow-slate-200 hover:shadow-md hover:shadow-slate-300 hover:bg-slate-200 transition-all delay-50 px-10 py-1 rounded-md"
         >Stop Pose</button>
       </div>
     )
@@ -266,7 +267,7 @@ function Yoga() {
 
   return (
     <div
-      className="yoga-container"
+      className="bg-white text-black"
     >
       <DropDown
         poseList={poseList}
@@ -276,10 +277,14 @@ function Yoga() {
       <Instructions
           currentPose={currentPose}
         />
+      <div className='w-full py-6'>
       <button
           onClick={startYoga}
-          className="secondary-btn"    
-        >Start Pose</button>
+          className="mx-auto block border-2 border-slate-500 shadow-md shadow-slate-200 hover:shadow-md hover:shadow-slate-300 hover:bg-slate-200 transition-all delay-50 px-10 py-1 rounded-md"
+        >
+            Start Pose
+        </button>
+      </div>
     </div>
   )
 }
