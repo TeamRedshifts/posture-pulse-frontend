@@ -39,32 +39,73 @@ function Yoga() {
   const canvasRef = useRef(null)
 
   const location = useLocation();
-  const { plan } = location.state;
-
-
+  const { plan } = location.state || { plan: { name: "No Pose" } };
+  
   const [startingTime, setStartingTime] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [poseTime, setPoseTime] = useState(0)
   const [bestPerform, setBestPerform] = useState(0)
   const [currentPose, setCurrentPose] = useState('Tree')
   const [isStartPose, setIsStartPose] = useState(false)
+  
+  const [exerciseNumber, setExerciseNumber] = useState(0)
+  const [exerciseDuration, setExerciseDuration] = useState(0)
+  const [isCorrect, setIsCorrect] = useState(false)
 
+
+  useEffect(async () => {
+    tf.setBackend('webgl');
+    await tf.ready()
+  }, [])
+
+
+  useEffect(() => {
+    if (plan.name !== "No Pose") {
+      if (exerciseNumber < plan.exercises.length) {
+        console.log("CHANGING EXERCISE", exerciseNumber)
+        setCurrentPose(plan.exercises[exerciseNumber].name)
+        setExerciseDuration(plan.exercises[exerciseNumber].duration)
+        setPoseTime(plan.exercises[exerciseNumber].duration)
+      } else {
+        console.log("NO MORE EXERCISES")
+      }
+    } else {
+      console.log("NO POSE")
+    }
+  }, [exerciseNumber])
   
   useEffect(() => {
-    const timeDiff = (currentTime - startingTime)/1000
+    const timeDiff = startingTime === 0 ? 0 : (currentTime - startingTime)/1000
+    console.log(timeDiff, "was the time Diff")
     if(flag) {
-      setPoseTime(timeDiff)
+      if (poseTime > 0) {
+        setPoseTime(exerciseDuration - timeDiff)
+      }
+      if (poseTime <= 0) {
+        console.log("FDFLJFLKSDJLFJSDL")
+        setPoseTime(0)
+        stopPose()
+        setExerciseNumber(exerciseNumber + 1)
+        setIsCorrect(false)
+      }
     }
     if((currentTime - startingTime)/1000 > bestPerform) {
       setBestPerform(timeDiff)
     }
   }, [currentTime])
 
+  useEffect(() => {
+    if (!isCorrect) {
+      setPoseTime(exerciseDuration)
+    }
+  }, [isCorrect])
+
 
   useEffect(() => {
-    setCurrentTime(0)
-    setPoseTime(0)
+    // setCurrentTime(0)
+    setPoseTime(exerciseDuration)
     setBestPerform(0)
+    console.log(currentPose)
   }, [currentPose])
 
   // const CLASS_NO = {
@@ -86,8 +127,6 @@ function Yoga() {
   for (let i = 0; i < poseList.length; i++) {
     CLASS_NO[poseList[i]] = i
   }
-
-  console.log(CLASS_NO)
 
   function get_center_point(landmarks, left_bodypart, right_bodypart) {
     let left = tf.gather(landmarks, left_bodypart, 1)
@@ -137,7 +176,7 @@ function Yoga() {
   }
 
   const runMovenet = async () => {
-    const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER};
+    const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING};
     const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
 
     // const poseClassifier = await tf.loadLayersModel('https://models.s3.jp-tok.cloud-object-storage.appdomain.cloud/model.json')
@@ -203,11 +242,13 @@ function Yoga() {
             if(!flag) {
               countAudio.play()
               setStartingTime(new Date(Date()).getTime())
+              setIsCorrect(true)
               flag = true
             }
             setCurrentTime(new Date(Date()).getTime()) 
             skeletonColor = 'rgb(0,255,0)'
           } else {
+            setIsCorrect(false)
             flag = false
             skeletonColor = 'rgb(255,255,255)'
             countAudio.pause()
@@ -239,7 +280,7 @@ function Yoga() {
       <div className="yoga-container">
         <div className="performance-container">
             <div className="pose-performance">
-              <h4>Pose Time: {poseTime} s</h4>
+              <h4>Hold the pose for: {poseTime} s</h4>
             </div>
             <div className="pose-performance">
               <h4>Best: {bestPerform} s</h4>
