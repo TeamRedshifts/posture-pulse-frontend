@@ -111,6 +111,12 @@ function ViewPlan() {
               </Link>
             </li>
             <li className='mb-4'>
+              <Link to='/contact-therapist' className='flex items-center border-2 border-slate-600 rounded-lg py-2 px-4 bg-slate-600 hover:bg-slate-700 hover:text-white'>
+                <RiAddFill className='mr-2' />
+                <span>Contact Therapist</span>
+              </Link>
+            </li>
+            <li className='mb-4'>
               <Link to='/' className='flex items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
                 <RiLogoutCircleLine className='mr-2' />
                 <span>Logout</span>

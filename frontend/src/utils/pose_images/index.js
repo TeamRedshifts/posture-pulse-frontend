@@ -9,6 +9,8 @@ import sidebend from './side-to-side-bend.webp'
 import leg from './leg pain.jpg'
 import neck from './neck pain.jpg'
 import shoulder from './shoulder pain.jpg'
+import leg_raise from './single_leg_raise.jpg'
+import calf from './calf_stretch.jpg'
 
 export const poseImages = {
     Tree: tree,
@@ -19,9 +21,9 @@ export const poseImages = {
     Traingle: traingle,
     Shoulderstand: shoulderstand,
     Side_to_side_bend:sidebend,
-    'Calf Stretch' : sidebend,
+    'Calf Stretch' : calf,
     'Side Leg Raise' : sidebend,
-    'Single Leg Raise' : sidebend,
+    'Single Leg Raise' : leg_raise,
 
     Leg:leg,
     Neck:neck,
