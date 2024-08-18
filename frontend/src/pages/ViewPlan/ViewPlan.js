@@ -16,6 +16,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { RiAddFill, RiLogoutCircleLine } from 'react-icons/ri';
 
 // Register necessary components for Chart.js
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
@@ -81,47 +82,67 @@ function ViewPlan() {
 
   return (
     <div className="w-full min-h-screen grid grid-cols-12 gap-4">
-      {/* dashboard */}
-      <div className='col-span-3 px-6 pt-6 mr-4 bg-slate-500 text-white'>
+      {/* side bar */}
+      <div className='col-span-3 px-8 pt-6 mr-4 bg-slate-500 text-white'>
         <div>
           <h2 className='font-bold text-2xl tracking-wide'>PosturePulse<span className='align-super font-normal text-md'>&reg;</span></h2>
           <p className='text-xs uppercase tracking-wide'>AI physiotherapy assistant</p>
         </div>
+        <div>
+          <ul className='mt-8'>
+            <li className='mb-4'>
+              <a href='#' className='flex items-center border-2 border-slate-600 rounded-lg py-2 px-4 bg-slate-600 hover:bg-slate-700 hover:text-white'>
+                <RiAddFill className='mr-2' />
+                <span>New Plan</span>
+              </a>
+            </li>
+            <li className='mb-4'>
+              <a href='#' className='flex items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
+                <RiLogoutCircleLine className='mr-2' />
+                <span>Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
       {/* content */}
-      <div className='col-span-9 pt-6 px-4'>
+      <div className='col-span-9 py-6 pl-4 pr-8'>
         <div className='mb-4'>
           <div className='flex items-center'>
             <FaRegUserCircle className='text-3xl mr-2' />
             <h2 className='text-3xl font-bold'>Hi, John Doe</h2>
           </div>
-          <p>Welcome back!</p>
         </div>
         <div className='my-4'>
-          <h2 className="text-2xl font-bold mb-4">Your Physiotherapy Plans</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <h2 className="text-2xl font-bold mb-4">My Plans</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4">
             {plans.map(plan => (
               <div
                 key={plan.id}
-                className="bg-white shadow-md rounded-lg p-4 cursor-pointer"
+                className="bg-white shadow-md rounded-xl overflow-clip cursor-pointer grid grid-cols-6"
                 onClick={() => handleCardClick(plan)}
               >
-                <h2 className="text-xl font-semibold mb-2">{plan.planName}</h2>
-                <ul className="list-disc pl-5">
-                  {plan.exercises.map((exercise, index) => (
-                    <li key={index} className="mb-1 list-disc">
-                      {exercise.name} - {exercise.duration} seconds
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-sm text-gray-500 mt-2">Created at: {new Date(plan.createdAt.seconds * 1000).toLocaleDateString()}</p>
+                <div className='col-span-2'>
+                  <img src='https://via.placeholder.com/150' alt='plan' className='w-full h-full object-cover' />
+                </div>
+                <div className='col-span-4 py-2 px-4'>
+                  <h2 className="text-xl font-semibold mb-2">{plan.planName}</h2>
+                  <ul className="list-disc pl-5">
+                    {plan.exercises.map((exercise, index) => (
+                      <li key={index} className="list-disc">
+                        {exercise.name} - {exercise.duration} seconds
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-sm text-gray-500 mt-2">Created at: {new Date(plan.createdAt.seconds * 1000).toLocaleDateString()}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
         <div className=''>
-          <h2 className='text-2xl font-bold mb-4'>Work so far</h2>
-          <div className='w-[80%]'>
+          <h2 className='text-2xl font-bold mb-4'>My Progress</h2>
+          <div className='w-full h-[330px]'>
             <Line data={data} options={options} />
           </div>
         </div>

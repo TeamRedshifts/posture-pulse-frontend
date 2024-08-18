@@ -22,7 +22,7 @@ export default function Home() {
                 <p className='text-sm mt-1 tracking-wider uppercase'>computer vision-based AI physiotherapy assistant</p>
             </div>
             <div className='mt-4 flex flex-row gap-4'>
-                <a href='/start' className="hover:shadow-[0_2px_10px_rgba(0,118,255,23%)] hover:bg-slate-900 px-8 py-3 bg-slate-600 rounded-md text-white transition duration-200 ease-linear cursor-pointer">
+                <a href='/login' className="hover:shadow-[0_2px_10px_rgba(0,118,255,23%)] hover:bg-slate-900 px-8 py-3 bg-slate-600 rounded-md text-white transition duration-200 ease-linear cursor-pointer">
                     Get Started!
                 </a>
                 <a href='/tutorials' className="hover:shadow-[0_2px_10px_rgba(0,0,0,23%)] px-8 py-3 bg-[rgba(255,255,255,0.2)] border-2 border-slate-400 rounded-md text-black transition duration-200 ease-linear cursor-pointer">
