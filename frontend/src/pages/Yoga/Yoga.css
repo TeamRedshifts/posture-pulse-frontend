@@ -1,4 +1,4 @@
-.yoga-container {
+/* .yoga-container {
     background: linear-gradient(100deg, #FF8C00, #FFA500);
     min-width: 100vw;
     min-height: 100vh;
@@ -33,13 +33,7 @@
 .starting-contdown h1 {
     color: white;
 }
-.pose-img {
-    position: absolute;
-    right: 120px;
-    top: 80px;
-    width: 500px;
-    aspect-ratio: 1;
-}
+ */
 
 .performance-container {
     display: flex;
@@ -50,7 +44,7 @@
 
 
 .pose-performance {
-    margin: 10px 10px;
+    margin-top: 20px;
     background-color: white;
     border-radius: 8px;
     padding: 10px;
@@ -61,8 +55,18 @@
 
 #webcam {
     transform: rotateY(180deg);
+    border-radius: 2%;
 }
 
 #my-canvas {
     transform: rotateY(180deg);
+    border-radius: 2%;
+}
+
+.pose-img {
+    position: absolute;
+    right: 120px;
+    top: 80px;
+    width: 500px;
+    aspect-ratio: 1;
 }
