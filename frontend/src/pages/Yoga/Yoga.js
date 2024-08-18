@@ -1,7 +1,7 @@
 import * as poseDetection from '@tensorflow-models/pose-detection';
 import * as tf from '@tensorflow/tfjs';
 import React, { useRef, useState, useEffect } from 'react'
-import backend from '@tensorflow/tfjs-backend-webgl'
+
 import Webcam from 'react-webcam'
 import { count } from '../../utils/music'; 
  
@@ -15,7 +15,7 @@ import { POINTS, keypointConnections } from '../../utils/data';
 import { drawPoint, drawSegment } from '../../utils/helper'
 import Navbar from '../../components/Navbar';
 
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 
@@ -334,6 +334,7 @@ function Yoga() {
     <div
       className="bg-white text-black"
     >
+      <Navbar />
       <DropDown
         poseList={poseList}
         currentPose={currentPose}
@@ -345,7 +346,7 @@ function Yoga() {
       <div className='w-full py-6'>
       <button
           onClick={startYoga}
-          className="mx-auto block border-2 border-slate-500 shadow-md shadow-slate-200 hover:shadow-md hover:shadow-slate-300 hover:bg-slate-200 transition-all delay-50 px-10 py-1 rounded-md"
+          className="mx-auto block border-2 border-slate-500 shadow-md text-white text-lg tracking-wide font-semibold bg-slate-600 shadow-slate-200 hover:shadow-md hover:shadow-slate-300 hover:bg-slate-200 transition-all delay-50 px-10 py-2 rounded-md"
         >
             Start Pose
         </button>

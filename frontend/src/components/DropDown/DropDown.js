@@ -7,7 +7,7 @@ import { RiArrowDropDownLine } from 'react-icons/ri'
 
 export default function DropDown({ poseList, currentPose, setCurrentPose }) {
 return (
-        <div className='text-black w-full mt-12'>
+        <div className='text-black w-full mt-4'>
         <button 
             className="dropdown-btn mx-auto block text-lg border-2 border-slate-500 shadow-md shadow-slate-200 hover:shadow-md hover:shadow-slate-300 hover:bg-slate-200 transition-all delay-50 px-14 py-2 rounded-md"
             type='button'
