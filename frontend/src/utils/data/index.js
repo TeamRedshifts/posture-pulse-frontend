@@ -114,9 +114,9 @@ export const keypointConnections = {
 export const exercises={
     leg:
         [
-            { id: 1, name: 'Exercise 1 leg' },
-            { id: 2, name: 'Exercise 2 leg' },
-            { id: 3, name: 'Exercise 3 leg' },
+            { id: 1, name: 'Calf Stretch' },
+            { id: 2, name: 'Side Leg Raise' },
+            { id: 3, name: 'Single Leg Raise' },
             // Add more exercises as needed
           ],
     neck:[
