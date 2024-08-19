@@ -123,7 +123,7 @@ function ViewPlan() {
             {!isLoading && plans.length === 0 && (
               <div>
                 <h2 className="text-xl font-semibold opacity-40">No plans available</h2>
-                <Link to='/create-plan' className='my-2 w-[200px] flex items-center border-2 border-slate-500 text-white rounded-lg py-2 px-2 bg-slate-500 hover:bg-slate-700 hover:text-white'>
+                <Link to='/view-patient-list' className='my-2 w-[200px] flex items-center border-2 border-slate-500 text-white rounded-lg py-2 px-2 bg-slate-500 hover:bg-slate-700 hover:text-white'>
                   <RiAddFill className='mr-2' />
                   <span>Add New Plan</span>
                 </Link>
