@@ -114,9 +114,9 @@ export const keypointConnections = {
 export const exercises={
     leg:
         [
-            { id: 1, name: 'Exercise 1 leg' },
-            { id: 2, name: 'Exercise 2 leg' },
-            { id: 3, name: 'Exercise 3 leg' },
+            { id: 1, name: 'Calf Stretch' },
+            { id: 2, name: 'Side Leg Raise' },
+            { id: 3, name: 'Single Leg Raise' },
             // Add more exercises as needed
           ],
     neck:
@@ -129,10 +129,16 @@ export const exercises={
     ,
 
     shoulders:
-        [
-            { id: 1, name: 'Exercise 1 shoulder' },
-            { id: 2, name: 'Exercise 2 shoulder' },
-            { id: 3, name: 'Exercise 3 shoulder' },
-            // Add more exercises as needed
-          ]
+    [
+        { id: 1, name: 'Shoulder Pendulum' },
+        { id: 2, name: 'Shoulder Blade Squeeze' },
+        { id: 3, name: 'Towel Stretch' },
+        { id: 4, name: 'Cross-Body Shoulder Stretch' },
+        { id: 5, name: 'Wall Crawl' },
+        { id: 6, name: 'External Rotation with Band' },
+        { id: 7, name: 'Internal Rotation with Band' },
+        { id: 8, name: 'Overhead Shoulder Stretch' },
+        { id: 9, name: 'Scapular Retraction' },
+        { id: 10, name: 'Isometric Shoulder Flexion' }
+    ]
 }

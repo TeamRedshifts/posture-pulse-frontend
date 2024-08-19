@@ -83,7 +83,7 @@ function ViewPlan() {
         const q = query(collection(db, 'plans'), where('userId', '==', user.uid));
         const querySnapshot = await getDocs(q);
         const userPlans = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setPlans(userPlans);
+        setPlans(userPlans.reverse());
         setIsLoading(false);
       }
     };
@@ -106,7 +106,7 @@ function ViewPlan() {
         <div className='mb-4'>
           <div className='flex items-center'>
             <FaRegUserCircle className='text-3xl mr-2' />
-            <h2 className='text-3xl font-bold'>Hi, John Doe</h2>
+            <h2 className='text-3xl font-bold'>Hi, Kamal</h2>
           </div>
         </div>
         <div className='my-4'>
