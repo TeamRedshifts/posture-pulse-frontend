@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RiLogoutCircleLine } from 'react-icons/ri';
+import Sidebar from '../../components/Sidebar';
 
 const ViewPatientList = () => {
   const [patients, setPatients] = useState([]);
@@ -20,21 +21,8 @@ const ViewPatientList = () => {
   return (
     <div className="w-full min-h-screen grid grid-cols-12 gap-4">
       {/* side bar */}
-      <div className='col-span-3 px-8 pt-6 mr-4 bg-slate-500 text-white'>
-        <div>
-          <h2 className='font-bold text-2xl tracking-wide'>PosturePulse<span className='align-super font-normal text-md'>&reg;</span></h2>
-          <p className='text-xs uppercase tracking-wide'>AI physiotherapy assistant</p>
-        </div>
-        <div>
-          <ul className='mt-8'>
-            <li className='mb-4'>
-              <Link to='/' className='flex items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
-                <RiLogoutCircleLine className='mr-2' />
-                <span>Logout</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
+      <div className='col-span-3'>
+        <Sidebar />
       </div>
       {/* content */}
       <div className='col-span-9 p-8'>

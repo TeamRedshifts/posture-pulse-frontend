@@ -72,7 +72,7 @@ function CreatePlan() {
       setErrorMessage('');
       setSuccessMessage('Plan submitted successfully!');
       setTimeout(() => {
-       navigate('/view-plan');
+      //  navigate('/view-plan');
       }, 2000); // Redirect after 2 seconds
     } catch (e) {
       console.error('Error adding document: ', e);
