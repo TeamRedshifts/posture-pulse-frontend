@@ -4,7 +4,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import  heroImage from '../utils/images/landing_page_hero_image.svg';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from "universal-cookie";
 
+const cookie = new Cookies();
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,6 +17,7 @@ function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      cookie.set('email', email, { path: '/' });
       navigate('/view-plan');
     } catch (error) {
       alert(error.message);
