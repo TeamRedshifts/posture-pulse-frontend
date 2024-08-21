@@ -4,7 +4,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import  heroImage from '../utils/images/landing_page_hero_image.svg';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from "universal-cookie";
 
+const cookie = new Cookies();
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,6 +17,7 @@ function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      cookie.set('email', email, { path: '/' });
       navigate('/view-plan');
     } catch (error) {
       alert(error.message);
@@ -23,13 +26,13 @@ function Login() {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-slate-200">
-      <div className="w-[60%] h-[70vh] rounded-xl overflow-hidden bg-slate-500 grid grid-cols-12 shadow-xl">
-        <div className="bg-white h-full px-16 py-4 col-span-7 text-center">
+      <div className="md:w-[60%] w-[90%] h-[70vh] rounded-xl overflow-hidden bg-slate-500 grid grid-cols-12 shadow-xl">
+        <div className="bg-white h-full px-16 py-4 md:col-span-7 hidden md:block text-center">
           <img src={heroImage} alt="hero image" width={300} className="pt-10 pb-6 mx-auto"/>
           <Link to='/' className="text-3xl hover:text-black font-bold">PosturePusle</Link>
           <p className='text-xs uppercase tracking-wider'>AI physiotherapy assistant</p>
         </div>
-        <div className=" col-span-5 px-8 relative">
+        <div className=" md:col-span-5 col-span-12 md:px-8 px-4 relative">
           <div className="absolute top-1/2 -translate-y-1/2 w-[81%]">
             <h2 className="text-xl font-bold text-white mb-4 w-fit mx-auto">Login</h2>
             <form onSubmit={handleLogin}>

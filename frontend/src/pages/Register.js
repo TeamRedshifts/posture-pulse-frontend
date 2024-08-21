@@ -21,13 +21,13 @@ function Register() {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-slate-200">
-      <div className="w-[60%] h-[70vh] rounded-xl overflow-hidden bg-slate-500 grid grid-cols-12 shadow-lg">
-        <div className="bg-white h-full px-16 py-4 col-span-7 text-center">
+      <div className="md:w-[60%] w-[90%] h-[70vh] rounded-xl overflow-hidden bg-slate-500 grid grid-cols-12 shadow-lg">
+        <div className="bg-white h-full px-16 py-4 md:col-span-7 hidden md:block text-center">
           <img src={heroImage} alt="hero image" width={300} className="pt-10 pb-6 mx-auto"/>
           <Link to='/' className="text-3xl hover:text-black font-bold">PosturePusle</Link>
           <p className='text-xs uppercase tracking-wider'>AI physiotherapy assistant</p>
         </div>
-        <div className=" col-span-5 px-8 relative">
+        <div className=" md:col-span-5 col-span-12 md:px-8 px-4 relative">
           <div className="absolute top-1/2 -translate-y-1/2 w-[81%]">
             <h2 className="text-xl font-bold text-white mb-4 w-fit mx-auto">Sign up</h2>
             <form onSubmit={handleRegister}>

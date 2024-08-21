@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from 'react-icons/fa';
 import {poseImages} from '../../utils/pose_images';
+import Cookies from 'universal-cookie';
 
 import  { Line } from 'react-chartjs-2';
 import {
@@ -19,6 +20,8 @@ import {
 
 import Sidebar from '../../components/Sidebar';
 import { RiAddFill } from 'react-icons/ri';
+
+const cookie = new Cookies();
 
 // Register necessary components for Chart.js
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
@@ -40,6 +43,8 @@ function ViewPlan() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  const [username, setUsername] = useState('');
 
   const data = {
     labels: ['12','13','14','15','16','17','18'],
@@ -89,6 +94,8 @@ function ViewPlan() {
     };
 
     fetchPlans();
+    const email = cookie.get('email');
+    setUsername(email.split('@')[0]);
   }, [user]);
 
   const handleCardClick = (plan) => {
@@ -106,7 +113,7 @@ function ViewPlan() {
         <div className='mb-4'>
           <div className='flex items-center'>
             <FaRegUserCircle className='text-3xl mr-2' />
-            <h2 className='text-3xl font-bold'>Hi, Kamal</h2>
+            <h2 className='text-3xl font-bold capitalize'>Hi, {username}</h2>
           </div>
         </div>
         <div className='my-4'>
@@ -116,7 +123,7 @@ function ViewPlan() {
             {!isLoading && plans.length === 0 && (
               <div>
                 <h2 className="text-xl font-semibold opacity-40">No plans available</h2>
-                <Link to='/create-plan' className='my-2 w-[200px] flex items-center border-2 border-slate-500 text-white rounded-lg py-2 px-2 bg-slate-500 hover:bg-slate-700 hover:text-white'>
+                <Link to='/view-patient-list' className='my-2 w-[200px] flex items-center border-2 border-slate-500 text-white rounded-lg py-2 px-2 bg-slate-500 hover:bg-slate-700 hover:text-white'>
                   <RiAddFill className='mr-2' />
                   <span>Add New Plan</span>
                 </Link>
