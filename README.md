@@ -1,3 +1,37 @@
-![image](https://i9.ytimg.com/vi_webp/r0kf7guMBDI/mq1.webp?sqp=CKCar7UG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gVCgTMA8=&rs=AOn4CLA3hM8L1pE4zZG-cU5qJL08oHGRIw) 
-<br>
-[project explanation](https://www.youtube.com/watch?v=fiDaAc7z_kQ)
+# Posture Pulse
+
+## Description
+
+PosturePulse is an AI-based physiotherapy assistant that provides real-time feedback and personalized exercise programs to help users improve their posture and alleviate pain. Posture Pulse does not simply replace your physiotherapist, but rather, it is a tool that can be used in conjunction with your physiotherapist to help you achieve your goals faster.
+Your physiotherapist can use Posture Pulse to give you personalized exercise programs and posture pulse will monitor whether you are doing the exercises correctly. It also keeps track of your progress and provides feedback to your physiotherapist so that they can adjust your program as needed.
+
+This repository contains the front-end of the Posture Pulse web application. You can find the AI model here: [Posture Pulse ML](https://github.com/TeamRedshifts/PosturePulse-ML)
+
+## Features
+
+- Real-time feedback on posture
+- Personalized exercise programs
+- Progress tracking
+- Feedback to physiotherapist
+
+## Technologies
+
+- React.js
+- Tailwind CSS
+- Firebase
+- TensorFlow.js (for real-time pose detection)
+
+## Installation
+
+1. Clone the repository
+2. Navigate to the project directory and to the `frontend` folder
+3. Run `npm install` to install dependencies
+4. Run `npm start` to start the development server
+
+## Demo
+
+<video src="demo/patient_interaction.mp4"></video>
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
