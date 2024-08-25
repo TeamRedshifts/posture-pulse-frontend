@@ -29,6 +29,7 @@ This repository contains the front-end of the Posture Pulse web application. You
 4. Run `npm start` to start the development server
 
 ## Demo
+[Watch the demo video](demo/patient_interaction.mp4)
 
 <video width="640" height="360" controls>
   <source src="demo/patient_interaction.mp4" type="video/mp4">
