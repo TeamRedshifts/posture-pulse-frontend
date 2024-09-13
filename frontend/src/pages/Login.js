@@ -1,7 +1,7 @@
 // src/Login.js
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth } from "../firebase/firebase";
 import  heroImage from '../utils/images/landing_page_hero_image.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from "universal-cookie";

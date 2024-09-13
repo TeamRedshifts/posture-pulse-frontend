@@ -16,10 +16,12 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 
 import ContactTherapist from './pages/ContactTherapist/ContactTherapist'
+import { AuthProvider } from './contexts/authContext'
 
 export default function App() {
   return (
-    <Router>
+    // <Router>
+    <AuthProvider>
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
@@ -35,7 +37,8 @@ export default function App() {
         <Route path="/view-patient-list" element={<ViewPatientList />} />
         
       </Routes>
-    </Router>
+    </AuthProvider>
+    //</Router>
   )
 }
 
