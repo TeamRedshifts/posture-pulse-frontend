@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db, auth } from '../../firebase'; // Adjust the import path as needed
+import { db, auth } from '../../firebase/firebase'; // Adjust the import path as needed
 import { collection, addDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { exercises } from '../../utils/data';
@@ -10,6 +10,7 @@ import { div } from '@tensorflow/tfjs';
 import { MdDelete } from 'react-icons/md';
 
 import Sidebar from '../../components/Sidebar';
+import { useAuth } from '../../contexts/authContext';
 
 
 
@@ -20,17 +21,10 @@ function CreatePlan() {
   const [planType, setPlanType] = useState('neck');
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [showExerciseList, setShowExerciseList] = useState(false);
-  const [user, setUser] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
+  const { currentUser, userLoggedIn } = useAuth();
 
   const handleAddExercise = (exercise) => {
     setSelectedExercises([...selectedExercises, { ...exercise, duration: 0 }]);
@@ -50,7 +44,7 @@ function CreatePlan() {
   };
 
   const handleSubmit = async () => {
-    if (!user) {
+    if (!userLoggedIn) {
       console.log('User not authenticated');
       return;
     }
@@ -62,7 +56,7 @@ function CreatePlan() {
   
     try {
       const docRef = await addDoc(collection(db, 'plans'), {
-        userId: user.uid,
+        userId: currentUser.uid,
         planName,
         planType,
         exercises: selectedExercises,
