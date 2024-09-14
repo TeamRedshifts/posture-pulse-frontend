@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db, auth } from '../../firebase'; // Adjust the import path as needed
+import { db, auth } from '../../firebase/firebase'; // Adjust the import path as needed
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,6 +20,7 @@ import {
 
 import Sidebar from '../../components/Sidebar';
 import { RiAddFill } from 'react-icons/ri';
+import { useAuth } from '../../contexts/authContext';
 
 const cookie = new Cookies();
 
@@ -40,9 +41,10 @@ function getImage (planType){
 }
 function ViewPlan() {
   const [plans, setPlans] = useState([]);
-  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  const { currentUser, userLoggedIn } = useAuth();
 
   const [username, setUsername] = useState('');
 
@@ -76,16 +78,9 @@ function ViewPlan() {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
     const fetchPlans = async () => {
-      if (user) {
-        const q = query(collection(db, 'plans'), where('userId', '==', user.uid));
+      if (currentUser) {
+        const q = query(collection(db, 'plans'), where('userId', '==', currentUser.uid));
         const querySnapshot = await getDocs(q);
         const userPlans = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setPlans(userPlans.reverse());
@@ -96,7 +91,7 @@ function ViewPlan() {
     fetchPlans();
     const email = cookie.get('email');
     setUsername(email.split('@')[0]);
-  }, [user]);
+  }, [currentUser]);
 
   const handleCardClick = (plan) => {
     navigate('/start', { state: { plan } });
