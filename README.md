@@ -39,3 +39,4 @@ This repository contains the front-end of the Posture Pulse web application. You
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
