@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { RiAddFill, RiLogoutCircleLine } from 'react-icons/ri';
 import { TbBulb } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Cookies from 'universal-cookie';
+import { auth } from '../firebase/firebase';
 
 
 export default function Sidebar({ poseList, currentPose, setCurrentPose }) {
   const cookie = new Cookies();
   const [isDoc, setIsDoc] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const email = cookie.get('email');
@@ -45,10 +48,10 @@ return (
               </Link>
             </li>
             <li className='mb-4'>
-              <Link to='/' className='flex items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
+              <button onClick={()=>{ auth.signOut(); navigate('/'); }} className='flex w-full items-center border-2 border-slate-400 rounded-lg py-2 px-4 hover:bg-slate-700 hover:border-slate-600 hover:text-white'>
                 <RiLogoutCircleLine className='mr-2' />
-                <span>Logout</span>
-              </Link>
+                Logout
+              </button>
             </li>
           </ul>
         </div>
